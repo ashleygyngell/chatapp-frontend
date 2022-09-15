@@ -15,6 +15,17 @@ export const getChatroom = (id) => {
   });
 };
 
+export const getAllChatrooms = () => {
+  return axios.get(
+    `${baseUrl}/chatrooms/allchatrooms/${localStorage.getItem('userId')}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    }
+  );
+};
+
 export const registerUser = (user) => {
   return axios.post(`${baseUrl}/authentication/register/`, user);
 };
@@ -25,6 +36,12 @@ export const loginUser = (user) => {
 
 export const createChat = (chat) => {
   return axios.post(`${baseUrl}/chatrooms/createchat/`, chat, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+  });
+};
+
+export const sendMessage = (senderId, message) => {
+  return axios.post(`${baseUrl}/chat/${senderId}/sendmessage`, message, {
     headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
   });
 };

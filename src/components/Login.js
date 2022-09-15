@@ -1,14 +1,15 @@
-import React from 'react'
+import React from 'react';
 import { loginUser } from '../lib/api';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { getLoggedInUserToken } from '../lib/auth.js';
 
 function Login() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [user, setUser] = React.useState({
     email: '',
     password: ''
-  })
+  });
 
   function handleChange(event) {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -20,13 +21,15 @@ function Login() {
     const getData = async () => {
       try {
         const { data } = await loginUser(user);
-        localStorage.setItem('accessToken', data.token)
-        navigate('/')
+        localStorage.setItem('accessToken', data.token);
+        localStorage.setItem('userId', data.userid);
+        navigate('/');
       } catch (err) {
         console.error(err);
       }
     };
     getData();
+    getLoggedInUserToken();
   }
 
   return (
@@ -71,7 +74,7 @@ function Login() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Login
+export default Login;
