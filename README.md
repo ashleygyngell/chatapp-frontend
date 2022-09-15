@@ -1,3 +1,5 @@
+<!-- CHECK -->
+
 ## Using NPM
 
 `npm run start` or `npm run dev` to run the development server
