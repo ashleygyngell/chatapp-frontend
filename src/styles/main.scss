@@ -1,0 +1,15 @@
+@import '~bulma/bulma.sass';
+@import 'bulma';
+
+.chat-image {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  
+}
+
+.chat-image img {
+  height: 10rem;
+  width: auto;
+  border-radius: 50%
+}
