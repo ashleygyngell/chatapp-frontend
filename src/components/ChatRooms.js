@@ -24,6 +24,7 @@ const ChatRooms = () => {
   return (
     <section className="section">
       <div className="container">
+        <p className="title has-text-centered">My Chats</p>{' '}
         {!chatData ? (
           <p>Loading chat...</p>
         ) : (
@@ -46,13 +47,22 @@ const ChatRooms = () => {
                     className="column is-2
                   "
                   >
-                    {chatData.data.map((data) => (
-                      <>
-                        <Link to={`${data.id}`}>
-                          <p key={data.name}>{data.name}</p>
-                        </Link>
-                      </>
-                    ))}
+                    {chatData.data.map(
+                      (data) => (
+                        console.log(data),
+                        (
+                          <>
+                            <div className="chat-rooms">
+                              <Link to={`${data.id}`}>
+                                <p key={data.name}> {data.name}</p>
+                                <p>{data.users}</p>
+                                <img src={`${data.image}`} alt="" />
+                              </Link>
+                            </div>
+                          </>
+                        )
+                      )
+                    )}
                   </div>
                 )}
               </div>

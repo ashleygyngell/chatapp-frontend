@@ -34,6 +34,7 @@ function Register() {
   return (
     <section className="section">
       <div className="container">
+        <p className="title has-text-centered">Register</p>{' '}
         <div className="columns">
           <form
             className="column is-half is-offset-one-quarter box"
@@ -90,7 +91,7 @@ function Register() {
               </div>
             </div>
             <div className="field">
-              <button type="submit" className="button is-fullwidth is-warning">
+              <button type="submit" className="button is-fullwidth is-success">
                 Register Me!
               </button>
             </div>

@@ -3,32 +3,61 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div className="bg-gray-100 ">
-      <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px- 8">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block">Lets Chat</span>
-          <span className="block text-indigo-600">Welcome to Ch@t</span>
-        </h2>
-        <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0 ">
-          <div className="inline-flex rounded-md shadow">
-            <Link
-              to={'/register'}
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:text-gray-600, hover:bg-indigo-800"
-            >
-              Register
+    <section className="section">
+      <div className="container">
+        <p className="title has-text-centered has-text-success">Chat</p>{' '}
+        <div className="columns container has-text-centered ">
+          <div className="column is-half">
+            <Link to="/signup">
+              <button className=" button ">Sign Up</button>
             </Link>
           </div>
-          <div className="ml-3 inline-flex rounded-md shadow">
-            <Link
-              to={'/login'}
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600 hover:bg-indigo-50"
-            >
-              Login
+          <div className="column is-half">
+            <Link to="/login">
+              <button className=" button is-success has-text-white">
+                Login
+              </button>
             </Link>
           </div>
+
+          {/* <form
+            className="box column is-half is-offset-one-quarter"
+            onSubmit={handleSubmit}
+          >
+            <div className="field">
+              <label className="label">Email</label>
+              <div className="control">
+                <input
+                  className="input"
+                  placeholder="Email"
+                  name="email"
+                  onChange={handleChange}
+                  value={user.email}
+                />
+              </div>
+            </div>
+            <div className="field">
+              <label className="label">Password</label>
+              <div className="control">
+                <input
+                  type="password"
+                  className="input"
+                  placeholder="Password"
+                  name="password"
+                  onChange={handleChange}
+                  value={user.password}
+                />
+              </div>
+            </div>
+            <div className="field">
+              <button type="submit" className="button is-fullwidth is-success">
+                Log Me In!
+              </button>
+            </div>
+          </form> */}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

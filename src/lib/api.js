@@ -41,6 +41,7 @@ export const createChat = (chat) => {
 };
 
 export const sendMessage = (senderId, message) => {
+  console.log('sent', senderId, message);
   return axios.post(`${baseUrl}/chat/${senderId}/sendmessage`, message, {
     headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
   });

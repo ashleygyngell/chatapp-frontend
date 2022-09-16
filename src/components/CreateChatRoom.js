@@ -90,7 +90,7 @@ function CreateChatRoom() {
               </div>
             </div>
             <div className="field">
-              <button type="submit" className="button is-warning is-fullwidth">
+              <button type="submit" className="button is-success is-fullwidth">
                 Create Chat!
               </button>
             </div>

@@ -23,7 +23,7 @@ function Login() {
         const { data } = await loginUser(user);
         localStorage.setItem('accessToken', data.token);
         localStorage.setItem('userId', data.userid);
-        navigate('/');
+        navigate('/mychats');
       } catch (err) {
         console.error(err);
       }
@@ -35,6 +35,7 @@ function Login() {
   return (
     <section className="section">
       <div className="container">
+        <p className="title has-text-centered">Login</p>{' '}
         <div className="columns">
           <form
             className="box column is-half is-offset-one-quarter"
@@ -66,7 +67,7 @@ function Login() {
               </div>
             </div>
             <div className="field">
-              <button type="submit" className="button is-fullwidth is-warning">
+              <button type="submit" className="button is-fullwidth is-success">
                 Log Me In!
               </button>
             </div>
