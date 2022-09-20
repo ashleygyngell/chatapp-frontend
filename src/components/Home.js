@@ -1,61 +1,73 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getLoggedInUserToken } from '../lib/auth.js';
+import logo from '../assets/logos/chatlogo.png';
+import image1 from '../assets/images/logo-part-1.png';
+import image2 from '../assets/images/logo-part-2.png';
 
 const Home = () => {
   return (
     <section className="section">
       <div className="container">
-        <p className="title has-text-centered has-text-success">Chat</p>{' '}
-        <div className="columns container has-text-centered ">
-          <div className="column is-half">
-            <Link to="/signup">
-              <button className=" button ">Sign Up</button>
-            </Link>
-          </div>
-          <div className="column is-half">
-            <Link to="/login">
-              <button className=" button is-success has-text-white">
-                Login
-              </button>
-            </Link>
-          </div>
+        {!getLoggedInUserToken() && (
+          <>
+            <div className="logo-container">
+              {/* <img className="logo" src={logo} alt="" /> */}
 
-          {/* <form
-            className="box column is-half is-offset-one-quarter"
-            onSubmit={handleSubmit}
-          >
-            <div className="field">
-              <label className="label">Email</label>
-              <div className="control">
-                <input
-                  className="input"
-                  placeholder="Email"
-                  name="email"
-                  onChange={handleChange}
-                  value={user.email}
-                />
+              <div className="parent">
+                {/* <img id="image1" className="image1" src={image1} /> */}
+
+                <img id="image2" className="image2" src={image2} />
+                <img id="image1" className="image1" src={image1} />
+              </div>
+              <span className="logo-text">hat</span>
+            </div>
+            <div className=" has-text-centered ">
+              <div className="column ">
+                <Link to="/register">
+                  <button className=" button ">Register</button>
+                </Link>
+              </div>
+
+              <div className="column ">
+                <Link to="/login">
+                  <button className=" button is-success has-text-white">
+                    Login
+                  </button>
+                </Link>
               </div>
             </div>
-            <div className="field">
-              <label className="label">Password</label>
-              <div className="control">
-                <input
-                  type="password"
-                  className="input"
-                  placeholder="Password"
-                  name="password"
-                  onChange={handleChange}
-                  value={user.password}
-                />
+          </>
+        )}
+        {getLoggedInUserToken() && (
+          <>
+            <div className="logo-container">
+              {/* <img className="logo" src={logo} alt="" /> */}
+
+              <div className="parent">
+                <img className="image1" src={image1} />
+                <img id="image2" className="image2" src={image2} />
+              </div>
+              <span className="logo-text">hat</span>
+            </div>
+
+            <div className=" has-text-centered">
+              <div className="column ">
+                <Link to="/mychats">
+                  <button className=" button ">My Chats</button>
+                </Link>
+              </div>
+
+              <div className="column ">
+                <Link to="/logout">
+                  <button className=" button is-success has-text-white">
+                    Logout
+                  </button>
+                </Link>
               </div>
             </div>
-            <div className="field">
-              <button type="submit" className="button is-fullwidth is-success">
-                Log Me In!
-              </button>
-            </div>
-          </form> */}
-        </div>
+          </>
+        )}
       </div>
     </section>
   );

@@ -1,11 +1,21 @@
 import React from 'react';
 import { registerUser } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
+import image1 from '../assets/images/logo-part-1.png';
+import image2 from '../assets/images/logo-part-2.png';
 
 function Register() {
   const navigate = useNavigate();
 
   const [user, setUser] = React.useState({
+    image: '',
+    username: '',
+    email: '',
+    password: '',
+    password_confirmation: ''
+  });
+
+  const [errorMessage, updateErrorMessage] = React.useState({
     username: '',
     email: '',
     password: '',
@@ -17,7 +27,6 @@ function Register() {
   }
 
   function handleSubmit(event) {
-    console.log(user);
     event.preventDefault();
 
     const getData = async () => {
@@ -25,21 +34,33 @@ function Register() {
         await registerUser(user);
         navigate('/login');
       } catch (err) {
-        console.error(err);
+        updateErrorMessage(err.response.data);
       }
     };
     getData();
   }
 
   return (
-    <section className="section">
+    <section className="section p-1">
       <div className="container">
-        <p className="title has-text-centered">Register</p>{' '}
-        <div className="columns">
+        <div className="columns mt-6">
           <form
             className="column is-half is-offset-one-quarter box"
             onSubmit={handleSubmit}
           >
+            <p className="title has-text-centered">Register</p>{' '}
+            <div className="field">
+              <label className="label">Profile Image</label>
+              <div className="control">
+                <input
+                  className="input"
+                  placeholder="Leave URL blank for default"
+                  name="image"
+                  onChange={handleChange}
+                  value={user.image}
+                />
+              </div>
+            </div>
             <div className="field">
               <label className="label">Username</label>
               <div className="control">
@@ -51,6 +72,10 @@ function Register() {
                   value={user.username}
                 />
               </div>
+              <small className="has-text-danger">
+                {' '}
+                {errorMessage.username}
+              </small>
             </div>
             <div className="field">
               <label className="label">Email</label>
@@ -63,6 +88,7 @@ function Register() {
                   value={user.email}
                 />
               </div>
+              <small className="has-text-danger">{errorMessage.email}</small>
             </div>
             <div className="field">
               <label className="label">Password</label>
@@ -76,6 +102,7 @@ function Register() {
                   value={user.password}
                 />
               </div>
+              <small className="has-text-danger">{errorMessage.password}</small>
             </div>
             <div className="field">
               <label className="label">Password Confirmation</label>
@@ -89,6 +116,9 @@ function Register() {
                   value={user.password_confirmation}
                 />
               </div>
+              <small className="has-text-danger">
+                {errorMessage.password_confirmation}
+              </small>
             </div>
             <div className="field">
               <button type="submit" className="button is-fullwidth is-success">

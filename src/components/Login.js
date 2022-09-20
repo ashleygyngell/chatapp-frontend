@@ -2,6 +2,8 @@ import React from 'react';
 import { loginUser } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
 import { getLoggedInUserToken } from '../lib/auth.js';
+import image1 from '../assets/images/logo-part-1.png';
+import image2 from '../assets/images/logo-part-2.png';
 
 function Login() {
   const navigate = useNavigate();
@@ -11,13 +13,14 @@ function Login() {
     password: ''
   });
 
+  const [errorMessage, updateErrorMessage] = React.useState('');
+
   function handleChange(event) {
     setUser({ ...user, [event.target.name]: event.target.value });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-
     const getData = async () => {
       try {
         const { data } = await loginUser(user);
@@ -25,7 +28,7 @@ function Login() {
         localStorage.setItem('userId', data.userid);
         navigate('/mychats');
       } catch (err) {
-        console.error(err);
+        updateErrorMessage(err.response.data.message);
       }
     };
     getData();
@@ -33,14 +36,14 @@ function Login() {
   }
 
   return (
-    <section className="section">
+    <section className="section p-1">
       <div className="container">
-        <p className="title has-text-centered">Login</p>{' '}
-        <div className="columns">
+        <div className="columns mt-6">
           <form
             className="box column is-half is-offset-one-quarter"
             onSubmit={handleSubmit}
           >
+            <p className="title has-text-centered">Login</p>{' '}
             <div className="field">
               <label className="label">Email</label>
               <div className="control">
@@ -68,8 +71,9 @@ function Login() {
             </div>
             <div className="field">
               <button type="submit" className="button is-fullwidth is-success">
-                Log Me In!
+                Log In
               </button>
+              <small className="has-text-danger"> {errorMessage}</small>
             </div>
           </form>
         </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { createChat } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
+import image1 from '../assets/images/logo-part-1.png';
+import image2 from '../assets/images/logo-part-2.png';
 
 function CreateChatRoom() {
   const navigate = useNavigate();
@@ -45,9 +47,11 @@ function CreateChatRoom() {
   }
 
   return (
-    <section className="section">
-      <div className="container">
-        <div className="columns">
+    <section className="section pt-1">
+      <div className="container has-text-centered">
+        <span className="not-homepage-text ">New Chat</span>
+
+        <div className="columns mt-3">
           <form
             className="column is-half is-offset-one-quarter box"
             onSubmit={handleSubmit}
@@ -64,7 +68,6 @@ function CreateChatRoom() {
                 />
               </div>
             </div>
-
             <div className="field">
               <label className="label">Image</label>
               <div className="control">

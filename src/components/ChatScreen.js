@@ -52,6 +52,7 @@ const ChatScreen = () => {
         const finalResult = [await someResult, await anotherResult];
         setChat(finalResult[0].data);
         setChatData(finalResult[1].data);
+        console.log(chat.users);
         // setInitialDate(finalResult[1].data.data[0].creation_time.split('T')[0]);
         // console.log(
         //   finalResult[1].data.data.filter((i) =>
@@ -74,7 +75,7 @@ const ChatScreen = () => {
   // }
 
   return (
-    <section className="section">
+    <section className="section pt-6">
       <div className="container">
         <button onClick={() => navigate(-1)} className="back-button ">
           <span>
@@ -91,8 +92,10 @@ const ChatScreen = () => {
               </figure>
             </div>
             <div>
-              <p className="title has-text-centered">{chat.name}</p>{' '}
-              <p className="subtitle has-text-centered">{chat.users}</p>
+              <p className="title is-2 has-text-centered">{chat.name}</p>{' '}
+              <p className="subtitle has-text-centered">
+                {chat.users.join(', ')}
+              </p>
               <hr />
               <div>
                 {!chatData ? (

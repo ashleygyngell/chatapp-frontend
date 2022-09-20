@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { getLoggedInUserToken } from '../lib/auth.js';
 import logo from '../assets/logos/chatlogo.png';
+import image2 from '../assets/images/logo-part-2.png';
+import dot1 from '../assets/images/dot1.png';
+import dot2 from '../assets/images/dot2.png';
+import dot3 from '../assets/images/dot3.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -21,10 +25,15 @@ const Navbar = () => {
   return (
     <header>
       <nav className="navbar is-white ">
-        <div className="navbar-brand">
-          <Link to="/" className="navbar-item has-text-success">
-            <img className="pr-1 " src={logo} alt="" />
-            Chat
+        <div className="navbar-brand ">
+          <Link to="/" className="has-text-success">
+            <div className="navbar-logo-parent">
+              <img className="navbar-image2" src={image2} />
+              <img id="dot1" className="navbar-dot" src={dot1} />
+              <img id="dot2" className="navbar-dot" src={dot2} />
+              <img id="dot3" className="navbar-dot" src={dot3} />
+              <span className="logo-text-navbar">hat</span>
+            </div>
           </Link>
           <a
             role="button"
@@ -60,13 +69,17 @@ const Navbar = () => {
             )}
             {getLoggedInUserToken() && (
               <>
-                <Link to="/newchat" className="navbar-item">
-                  New Chat
-                </Link>
+                <div className="navbar-item">
+                  <Link to="/newchat">
+                    <button className=" button ">New Chat</button>
+                  </Link>
+                </div>
 
-                <Link to="/mychats" className="navbar-item">
-                  My Chats
-                </Link>
+                <div className="navbar-item">
+                  <Link to="/mychats">
+                    <button className=" button ">My Chats</button>
+                  </Link>
+                </div>
                 <div className="navbar-item">
                   <button
                     className=" button is-success has-text-white"
@@ -74,6 +87,13 @@ const Navbar = () => {
                   >
                     Log Out
                   </button>
+                </div>
+                <div className="navbar-item">
+                  <Link to={'/profile'}>
+                    <span className="icon has-text-success mt-2">
+                      <i className="fas fa-user fa-xl"></i>
+                    </span>
+                  </Link>
                 </div>
               </>
             )}
