@@ -1,15 +1,8 @@
-/* eslint-disable comma-dangle */
 import axios from 'axios';
 
 const baseUrl = 'http://127.0.0.1:8000';
 
-// USER API CALLS
-
-export const getUserById = (id) => {
-  return axios.get(`${baseUrl}/authentication/allusers/${id}`, {
-    headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
-  });
-};
+// ----------- User API Calls ---------------
 
 export const getUserCredentials = () => {
   return axios.get(`${baseUrl}/authentication/credentials/`, {
@@ -25,7 +18,19 @@ export const loginUser = (user) => {
   return axios.post(`${baseUrl}/authentication/login/`, user);
 };
 
-// CHAT API CALLS
+export const getUserFromId = (id) => {
+  return axios.get(`${baseUrl}/authentication/allusers/${id}`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+  });
+};
+
+export const getAllUsers = () => {
+  return axios.get(`${baseUrl}/authentication/allusers/`, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+  });
+};
+
+// ----------- Chat API Calls ---------------
 
 export const createChat = (chat) => {
   return axios.post(`${baseUrl}/chatrooms/createchat/`, chat, {

@@ -1,23 +1,24 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import image1 from '../assets/images/logo-part-1.png';
-import image2 from '../assets/images/logo-part-2.png';
 
-import { getAllChatrooms, getUserById } from '../lib/api';
+import { getAllChatrooms, getUserCredentials } from '../lib/api';
 
 const ChatRooms = () => {
   const chatId = useParams().id;
   const [chatData, setChatData] = React.useState(null);
 
+  const [userCredentials, setUserCredentials] = React.useState(null);
+
   React.useEffect(() => {
     const getData = async () => {
       try {
-        const data = await getAllChatrooms(chatId);
-        setChatData(data.data);
-        console.log(await (await getUserById(2)).data.data[0].username);
-        // const testing = data.users.forEach((e) => getUserById(e));
-        // console.log(testing.data.data[0]);
+        const [firstResponse, secondResponse] = await Promise.all([
+          getUserCredentials(),
+          getAllChatrooms(chatId)
+        ]);
+        setUserCredentials(firstResponse.data);
+        setChatData(secondResponse.data);
       } catch (err) {
         console.error(err);
       }
@@ -42,26 +43,37 @@ const ChatRooms = () => {
                   <>
                     <hr />
                     <div className="columns chat-rooms has-text-centered ">
-                      <Link className="column " to={`${data.id}`}>
-                        <div className="column chatroom-image pb-5 ">
-                          <img src={`${data.image}`} alt="" />
-                        </div>
+                      <Link key={data.id} className="column " to={`${data.id}`}>
+                        <div className="column chatroom-image p-0 "></div>
                         <div className="chat-room-info">
                           <p className="title is-3 pb-2" key={data.name}>
                             {' '}
                             {data.name}
                           </p>
 
-                          <p className="subtitle is-5">
-                            {/* {data.users.join(', ')} */}
-
-                            {(data = data.users.forEach((e) => getUserById(e)))}
-
-                            {/* {console.log(
-                              data.users.forEach((e) => getUserById(e)).data
-                                .data[0].username
-                            )} */}
-                          </p>
+                          <div className="subtitle is-5 chatrooms-members">
+                            {data.users.map((data) => {
+                              if (data.username !== userCredentials.username) {
+                                return (
+                                  <>
+                                    <div className=" chat-rooms pr-5 pl-5 pt-4  ">
+                                      <img
+                                        key={data.image}
+                                        src={`${data.image}`}
+                                        alt={data.image}
+                                      />
+                                      <div
+                                        className="pr-2 pl-2 pt-4 pb-0 "
+                                        key={data.username}
+                                      >
+                                        {data.username}
+                                      </div>
+                                    </div>
+                                  </>
+                                );
+                              }
+                            })}
+                          </div>
                         </div>
                       </Link>
                     </div>

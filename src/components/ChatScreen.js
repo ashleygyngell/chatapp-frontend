@@ -12,7 +12,7 @@ const messageField = document.getElementById('message');
 
 document.addEventListener('keyup', function (event) {
   if (event.code === 'Enter') {
-    console.log('Enter is pressed!');
+    console.log('Message Sent with Enter');
   }
 });
 
@@ -29,10 +29,18 @@ const ChatScreen = () => {
     sender_id: `${userId}`
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(message);
     sendMessage(chatId, message);
+    try {
+      const someResult = getChatroom(chatId);
+      const anotherResult = getChat(chatId);
+      const finalResult = [await someResult, await anotherResult];
+      setChat(finalResult[0].data);
+      setChatData(finalResult[1].data);
+    } catch (err) {
+      console.error(err);
+    }
     messageField.value = '';
   };
 
@@ -52,50 +60,44 @@ const ChatScreen = () => {
         const finalResult = [await someResult, await anotherResult];
         setChat(finalResult[0].data);
         setChatData(finalResult[1].data);
-        console.log(chat.users);
-        // setInitialDate(finalResult[1].data.data[0].creation_time.split('T')[0]);
-        // console.log(
-        //   finalResult[1].data.data.filter((i) =>
-        //     `${userId}`.includes(i.sender_id)
-        //   )
-        // );
       } catch (err) {
         console.error(err);
       }
     };
+
     getData();
-  }, [chatId]);
-
-  // React.useEffect(() => {
-  //   const getChatEverySecond = async () => {
-  //     try {
-
-  //     }
-  //   }
-  // }
+  }, []);
 
   return (
-    <section className="section pt-6">
+    <section className="section pt-4">
       <div className="container">
-        <button onClick={() => navigate(-1)} className="back-button ">
-          <span>
-            <i className="fa-solid fa-arrow-left "></i> Back
+        <button onClick={() => navigate(-1)} className="back-button pb-2 ">
+          <span className="subtitle">
+            <i className="fa-solid fa-arrow-left "></i> <strong>Back</strong>
           </span>
         </button>
         {!chat ? (
           <p>Loading chat...</p>
         ) : (
           <>
-            <div className="chat-image">
-              <figure>
-                <img src={chat.image} alt={chat.image} />
-              </figure>
-            </div>
             <div>
               <p className="title is-2 has-text-centered">{chat.name}</p>{' '}
-              <p className="subtitle has-text-centered">
-                {chat.users.join(', ')}
-              </p>
+              <div className="subtitle has-text-centered chat-info">
+                {chat.users.map((data) => (
+                  <>
+                    <div className=" chat-rooms pr-5 pl-5 pt-6 ">
+                      <img
+                        key={data.image}
+                        src={`${data.image}`}
+                        alt={data.image}
+                      />
+                      <div className="pr-2 pl-2 pt-4 pb-0" key={data.username}>
+                        {data.username}
+                      </div>
+                    </div>
+                  </>
+                ))}
+              </div>
               <hr />
               <div>
                 {!chatData ? (
@@ -105,7 +107,7 @@ const ChatScreen = () => {
                     <section className="columns">
                       <div className="column">
                         {chatData.data.map((data) => {
-                          if (data.sender_id === userId) {
+                          if (data.sender_id.id === userId) {
                             // console.log(data.creation_time.split('T')[0]);
                             return (
                               <>
@@ -125,20 +127,19 @@ const ChatScreen = () => {
                                 </div>
                               </>
                             );
-                            //   <br />{' '}
-                            // </>;
                           } else {
-                            console.log('recieved');
                             return (
                               <>
-                                {/* <div className="sender-id">
-                                  {data.sender_id}
-                                </div> */}
                                 <div
                                   className="recieved-message"
                                   key={data.chat_id}
                                 >
-                                  <p>{data.message}</p>
+                                  <div className=" ">
+                                    <p className="message-data-username">
+                                      {data.sender_id.username}
+                                    </p>
+                                    <p>{data.message}</p>
+                                  </div>
                                   <span className="message-data">
                                     {data.creation_time
                                       .split('T')[1]
@@ -148,29 +149,9 @@ const ChatScreen = () => {
                                 </div>
                               </>
                             );
-                            // <>
-                            //   {' '}
-                            //   <p
-                            //     className="recieved-message"
-                            //     key={data.chat_id}
-                            //   >
-                            //     {data.creation_time} {data.message}
-                            //   </p>{' '}
-                            //   <br />
-                            // </>;
                           }
                         })}
                       </div>
-                      {/* <div className="column is-6">
-                        {chatData.data.map((data) => (
-                          <>
-                            <p key={data.chat_id}>
-                              {data.creation_time} {data.message}
-                            </p>
-                            <br />
-                          </>
-                        ))}
-                      </div> */}
                     </section>
                   </>
                 )}
@@ -186,7 +167,7 @@ const ChatScreen = () => {
         >
           <div className="message compose-message-box">
             <label className="label">Compose Message:</label>
-            <div className="control">
+            <div id="message-box" className="control">
               <input
                 id="message"
                 className="input is-success"

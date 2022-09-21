@@ -1,8 +1,7 @@
 import React from 'react';
 import { registerUser } from '../lib/api';
+import { loginUser } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
-import image1 from '../assets/images/logo-part-1.png';
-import image2 from '../assets/images/logo-part-2.png';
 
 function Register() {
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ function Register() {
     const getData = async () => {
       try {
         await registerUser(user);
-        navigate('/login');
+        navigate('/');
       } catch (err) {
         updateErrorMessage(err.response.data);
       }

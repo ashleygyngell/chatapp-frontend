@@ -1,7 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
 import { getUserCredentials } from '../lib/api';
 
 const Profile = () => {
@@ -37,13 +36,21 @@ const Profile = () => {
                   src={`${userCredentials.image}`}
                   alt=""
                 />
+
                 <hr />
+
                 <p className="title">Username: {userCredentials.username}</p>
                 <p className="title">Email: {userCredentials.email}</p>
                 <p>
                   <strong>Member since:</strong>{' '}
                   {userCredentials.date_joined.split('T')[0]}
                 </p>
+                <Link to="/mychats">
+                  <button className=" button is-success mt-4 ">
+                    {' '}
+                    My Chats
+                  </button>
+                </Link>
               </div>
             )}
           </>

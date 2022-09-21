@@ -1,8 +1,6 @@
 import React from 'react';
-import { createChat } from '../lib/api';
+import { createChat, getAllUsers } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
-import image1 from '../assets/images/logo-part-1.png';
-import image2 from '../assets/images/logo-part-2.png';
 
 function CreateChatRoom() {
   const navigate = useNavigate();
@@ -12,9 +10,10 @@ function CreateChatRoom() {
   });
 
   const [chatroom, setChatroom] = React.useState({
-    name: '',
-    image: ''
+    name: ''
   });
+
+  const [allUsers, setAllUsers] = React.useState('');
 
   function handleChange(event) {
     setChatroom({
@@ -23,11 +22,20 @@ function CreateChatRoom() {
     });
   }
 
+  function handleChangeForDropdown(event) {
+    setUsersArray({
+      ...usersArray,
+      users: Array.from(event.target.value)
+    });
+    console.log(usersArray);
+  }
+
   function handleChangeForArray(event) {
     setUsersArray({
       ...usersArray,
       [event.target.name]: Array.from(event.target.value)
     });
+    console.log(usersArray);
   }
 
   function handleSubmit(event) {
@@ -46,12 +54,24 @@ function CreateChatRoom() {
     getData();
   }
 
+  React.useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await getAllUsers();
+        setAllUsers(data.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getData();
+  }, [chatroom]);
+
   return (
     <section className="section pt-1">
       <div className="container has-text-centered">
         <span className="not-homepage-text ">New Chat</span>
 
-        <div className="columns mt-3">
+        <div className="columns mt-4">
           <form
             className="column is-half is-offset-one-quarter box"
             onSubmit={handleSubmit}
@@ -69,17 +89,34 @@ function CreateChatRoom() {
               </div>
             </div>
             <div className="field">
-              <label className="label">Image</label>
-              <div className="control">
-                <input
-                  className="input"
-                  placeholder="Image URL"
-                  name="image"
-                  onChange={handleChange}
-                  value={chatroom.image}
-                />
-              </div>
+              <label className="label">
+                Other Users
+                <div className="control">
+                  <div className="select is-multiple is-fullwidth">
+                    <select multiple size="4">
+                      {!allUsers ? (
+                        <p>Loading chat...</p>
+                      ) : (
+                        allUsers.data.map((user) => {
+                          {
+                            return (
+                              <option
+                                name="users"
+                                onClick={handleChangeForDropdown}
+                                value={user.id}
+                              >
+                                {user.username}
+                              </option>
+                            );
+                          }
+                        })
+                      )}
+                    </select>
+                  </div>
+                </div>
+              </label>
             </div>
+
             <div className="field">
               <label className="label">Other Users</label>
               <div className="control">

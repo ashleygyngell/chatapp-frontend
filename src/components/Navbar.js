@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { getLoggedInUserToken } from '../lib/auth.js';
-import logo from '../assets/logos/chatlogo.png';
 import image2 from '../assets/images/logo-part-2.png';
 import dot1 from '../assets/images/dot1.png';
 import dot2 from '../assets/images/dot2.png';
@@ -32,7 +31,7 @@ const Navbar = () => {
               <img id="dot1" className="navbar-dot" src={dot1} />
               <img id="dot2" className="navbar-dot" src={dot2} />
               <img id="dot3" className="navbar-dot" src={dot3} />
-              <span className="logo-text-navbar">hat</span>
+              <span className="logo-text-navbar"></span>
             </div>
           </Link>
           <a

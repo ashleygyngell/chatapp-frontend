@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedInUserToken } from '../lib/auth.js';
-import logo from '../assets/logos/chatlogo.png';
 import image1 from '../assets/images/logo-part-1.png';
 import image2 from '../assets/images/logo-part-2.png';
 
@@ -12,15 +11,11 @@ const Home = () => {
         {!getLoggedInUserToken() && (
           <>
             <div className="logo-container">
-              {/* <img className="logo" src={logo} alt="" /> */}
-
               <div className="parent">
-                {/* <img id="image1" className="image1" src={image1} /> */}
-
                 <img id="image2" className="image2" src={image2} />
                 <img id="image1" className="image1" src={image1} />
               </div>
-              <span className="logo-text">hat</span>
+              <span className="logo-text">Chat</span>
             </div>
             <div className=" has-text-centered ">
               <div className="column ">
@@ -42,8 +37,6 @@ const Home = () => {
         {getLoggedInUserToken() && (
           <>
             <div className="logo-container">
-              {/* <img className="logo" src={logo} alt="" /> */}
-
               <div className="parent">
                 <img className="image1" src={image1} />
                 <img id="image2" className="image2" src={image2} />

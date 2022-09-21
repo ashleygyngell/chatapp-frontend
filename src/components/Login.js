@@ -2,8 +2,6 @@ import React from 'react';
 import { loginUser } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
 import { getLoggedInUserToken } from '../lib/auth.js';
-import image1 from '../assets/images/logo-part-1.png';
-import image2 from '../assets/images/logo-part-2.png';
 
 function Login() {
   const navigate = useNavigate();
