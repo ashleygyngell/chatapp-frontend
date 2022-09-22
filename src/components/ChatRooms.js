@@ -6,6 +6,7 @@ import { getAllChatrooms, getUserCredentials } from '../lib/api';
 
 const ChatRooms = () => {
   const chatId = useParams().id;
+  console.log(chatId);
   const [chatData, setChatData] = React.useState(null);
 
   const [userCredentials, setUserCredentials] = React.useState(null);
@@ -35,10 +36,16 @@ const ChatRooms = () => {
           <p>Loading chats...</p>
         ) : (
           <>
-            {!chatData ? (
-              <p>No Chats ... Create a Chat</p>
+            {chatData.data == 0 ? (
+              <>
+                <p className="title is-3 pt-5">No chats ... Start a new chat</p>
+                <Link to="/newchat">
+                  <button className=" button has-text-success">New Chat</button>
+                </Link>
+              </>
             ) : (
               <div className="chatrooms-container">
+                {console.log(chatData.data)}
                 {chatData.data.map((data) => (
                   <>
                     <hr />
@@ -46,7 +53,7 @@ const ChatRooms = () => {
                       <Link key={data.id} className="column " to={`${data.id}`}>
                         <div className="column chatroom-image p-0 "></div>
                         <div className="chat-room-info">
-                          <p className="title is-3 pb-2" key={data.name}>
+                          <p className="title is-3 pb-2 " key={data.name}>
                             {' '}
                             {data.name}
                           </p>
@@ -56,7 +63,7 @@ const ChatRooms = () => {
                               if (data.username !== userCredentials.username) {
                                 return (
                                   <>
-                                    <div className=" chat-rooms pr-5 pl-5 pt-4  ">
+                                    <div className=" chat-rooms pr-5 pl-5 pt-5  ">
                                       <img
                                         key={data.image}
                                         src={`${data.image}`}

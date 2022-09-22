@@ -36,9 +36,7 @@ const Profile = () => {
                   src={`${userCredentials.image}`}
                   alt=""
                 />
-
                 <hr />
-
                 <p className="title">Username: {userCredentials.username}</p>
                 <p className="title">Email: {userCredentials.email}</p>
                 <p>

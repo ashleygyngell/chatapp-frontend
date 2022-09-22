@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { getLoggedInUserToken } from '../lib/auth.js';
-import image2 from '../assets/images/logo-part-2.png';
-import dot1 from '../assets/images/dot1.png';
-import dot2 from '../assets/images/dot2.png';
-import dot3 from '../assets/images/dot3.png';
+import image2 from '../assets/images/C.png';
+import dot1 from '../assets/images/C2.png';
+import dot2 from '../assets/images/C3.png';
+import dot3 from '../assets/images/C4.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const Navbar = () => {
       <nav className="navbar is-white ">
         <div className="navbar-brand ">
           <Link to="/" className="has-text-success">
-            <div className="navbar-logo-parent">
+            <div className="navbar-logo-parent ">
               <img className="navbar-image2" src={image2} />
               <img id="dot1" className="navbar-dot" src={dot1} />
               <img id="dot2" className="navbar-dot" src={dot2} />

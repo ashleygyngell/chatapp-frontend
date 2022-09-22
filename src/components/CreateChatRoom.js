@@ -1,17 +1,19 @@
 import React from 'react';
-import { createChat, getAllUsers } from '../lib/api';
+import { createChat, getAllUsers, getUserCredentials } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
 
 function CreateChatRoom() {
   const navigate = useNavigate();
 
-  const [usersArray, setUsersArray] = React.useState({
-    users: []
-  });
+  const [usersArray, setUsersArray] = React.useState([]);
+
+  const [others, setOthers] = React.useState([]);
 
   const [chatroom, setChatroom] = React.useState({
     name: ''
   });
+
+  const [userCredentials, setUserCredentials] = React.useState([]);
 
   const [allUsers, setAllUsers] = React.useState('');
 
@@ -23,30 +25,35 @@ function CreateChatRoom() {
   }
 
   function handleChangeForDropdown(event) {
-    setUsersArray({
-      ...usersArray,
-      users: Array.from(event.target.value)
-    });
-    console.log(usersArray);
-  }
-
-  function handleChangeForArray(event) {
-    setUsersArray({
-      ...usersArray,
-      [event.target.name]: Array.from(event.target.value)
-    });
-    console.log(usersArray);
+    event.preventDefault();
+    if (usersArray.includes(event.target.value)) {
+      event.target.style.background = 'none';
+      event.target.style.color = 'black';
+      const arrayIndex = usersArray.indexOf(event.target.value);
+      if (arrayIndex > -1) {
+        usersArray.splice(arrayIndex, 1);
+      }
+    } else {
+      event.target.style.background = 'mediumseagreen';
+      event.target.style.color = 'white';
+      setUsersArray([...usersArray, event.target.value]);
+    }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    const chatroomObject = { ...chatroom, ...usersArray };
-
+    const newArray = { users: usersArray.concat(userCredentials) };
+    console.log('newArray', newArray);
+    const chatroomObject = {
+      ...chatroom,
+      ...newArray
+    };
     const getData = async () => {
       try {
         const data = await createChat(chatroomObject);
         const navigateToChat = data.data.chatroomId.id;
-        navigate(`/chatrooms/${navigateToChat}/`);
+        console.log('chatroomData', data.data);
+        navigate(`/mychats/${navigateToChat}/`);
       } catch (err) {
         console.error(err);
       }
@@ -58,13 +65,15 @@ function CreateChatRoom() {
     const getData = async () => {
       try {
         const data = await getAllUsers();
+        const data2 = await getUserCredentials();
         setAllUsers(data.data);
+        setUserCredentials([data2.data.id.toString()]);
       } catch (err) {
         console.error(err);
       }
     };
     getData();
-  }, [chatroom]);
+  }, []);
 
   return (
     <section className="section pt-1">
@@ -89,46 +98,35 @@ function CreateChatRoom() {
               </div>
             </div>
             <div className="field">
-              <label className="label">
-                Other Users
-                <div className="control">
-                  <div className="select is-multiple is-fullwidth">
-                    <select multiple size="4">
-                      {!allUsers ? (
-                        <p>Loading chat...</p>
-                      ) : (
-                        allUsers.data.map((user) => {
-                          {
-                            return (
-                              <option
-                                name="users"
-                                onClick={handleChangeForDropdown}
-                                value={user.id}
-                              >
-                                {user.username}
-                              </option>
-                            );
-                          }
-                        })
-                      )}
-                    </select>
-                  </div>
-                </div>
-              </label>
-            </div>
+              <label className="label ">Other Users</label>
 
-            <div className="field">
-              <label className="label">Other Users</label>
               <div className="control">
-                <input
-                  className="input"
-                  placeholder="Joe Bloggs, Steve Bloggs"
-                  name="users"
-                  onChange={handleChangeForArray}
-                  value={chatroom.users}
-                />
+                <div className="select is-multiple is-fullwidth">
+                  <p id="select" multiple size="4">
+                    {!allUsers ? (
+                      <p>Loading chat...</p>
+                    ) : (
+                      allUsers.data.map((user) => {
+                        {
+                          return (
+                            <option
+                              className="list-item"
+                              id={`list-item-${user.id}`}
+                              name="users"
+                              onClick={handleChangeForDropdown}
+                              value={user.id}
+                            >
+                              {user.username}
+                            </option>
+                          );
+                        }
+                      })
+                    )}
+                  </p>
+                </div>
               </div>
             </div>
+
             <div className="field">
               <button type="submit" className="button is-success is-fullwidth">
                 Create Chat!

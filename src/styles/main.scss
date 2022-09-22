@@ -7,10 +7,16 @@ $success: #035BFA;
 
 // ----------- General ---------------
 
+
+
+
+
 * {
   font-family: 'Manrope',
     sans-serif;
 }
+
+
 
 body {
   background-color: gainsboro;
@@ -33,6 +39,19 @@ hr {
     cursor: pointer;
   }
 }
+
+#logo-not-homepage img {
+  width: 4rem;
+  color: #035BFA;
+}
+
+.not-homepage-text {
+  color: #035BFA;
+  font-size: 4rem;
+  font-weight: bolder
+}
+
+
 
 // ----------- Logo ---------------
 
@@ -61,18 +80,20 @@ parent-not-homepage{
 }
 
 .parent {
+
+  animation-delay: 0s;
   position: relative;
   top: 0;
-  left: 0;
+  left: 0px;
   rotate: 0deg
 }
 
 .image1 {
   position: absolute;
   top: 0px;
-  left: 0;
+  left: 0px;
   height: auto;
-  width: 16vw;
+  width: 40rem;
   rotate: 0deg;
 }
 
@@ -81,7 +102,7 @@ parent-not-homepage{
   top: 0px;
   left: 0;
   height: auto;
-  width: 16vw
+  width: 36vw
 }
 
 .image2 {
@@ -89,35 +110,53 @@ parent-not-homepage{
   top: 0px;
   left: 0px;
   height: auto;
-  width: 16vw;
+  width: 40rem;
   rotate: 0deg;
 }
 
-#logo-not-homepage img {
-  width: 4rem;
-  color: #035BFA;
+#dot-1 {
+  animation: fadeInLeft .8s ease backwards;
+  animation-delay: 0s;
+  animation-iteration-count: 4;
 }
-  
-.not-homepage-text {
-  color: #035BFA;
-  font-size: 4rem;
-  font-weight: bolder
+
+#dot-2 {
+  animation: fadeInLeft .8s ease backwards;
+  animation-delay: .2s;
+  animation-iteration-count: 4;
 }
-  
-  
-#image2 {
- animation: fadeIn 2.2s ease backwards;
- animation-delay: .7s;
- rotate: 4deg;
+
+#dot-3 {
+  animation: fadeInLeft .8s ease backwards;
+  animation-delay: .4s;
+  animation-iteration-count: 4;
 }
+
+#logo-text {
+  animation: fadeIn 1.3s ease backwards;
+  animation-delay: 1.2s;
+}
+
+#homepage-button {
+  transform: scale(1.5);
+  margin-top: 3rem;
+  height: 3rem;
+  width: auto;
+  animation: fadeIn 1.5s ease backwards;
+    animation-delay: 2s;
+}
+
+
 
 // ----------- Navbar ---------------
 
 .navbar-logo-parent {
   position: relative;
-  top: 0;
+  top: 2px;
   left: 8px;
+  margin-bottom: -5px
 } 
+
 
 .navbar-logo-parent:hover{
   #dot1{
@@ -139,12 +178,14 @@ parent-not-homepage{
     }
 }
 
+
+
 .navbar-dot {
   position: absolute;
-  top: 8px;
+  top: 2px;
   left: 0;
   height: auto;
-  width: 40px
+  width: 140px
 }
 
 .navbar-image2 {
@@ -152,8 +193,7 @@ parent-not-homepage{
   top: 2px;
   left: 0px;
   height: auto;
-  width: 40px;
-  rotate: 4deg;
+  width: 140px;
 }
 
 .logo-text-navbar {
@@ -167,11 +207,13 @@ parent-not-homepage{
 }
 
 #navbar-brand img {
-  padding-top: 5px;
+  padding-top: 10px;
   margin-left: 10px;
   height: 4rem;
   width: auto;
 }
+
+
 
 // ----------- Chatrooms ---------------
 
@@ -304,25 +346,38 @@ parent-not-homepage{
 
 @keyframes fadeIn {
   0% {
-      transform: rotate(30deg);
+    opacity: 0;
   }
+
   100% {
-      transform: rotate(0deg);
+    opacity: 1;
   }
 }
 
 @keyframes fadeInLeft {
   0% {
     opacity: 1;
-    
   }
     50% {
-      opacity: .4;
-  
+      opacity: .2;
     }
   100% {
     opacity: 1;
-
   }
 }
+
+    @keyframes fadeInMove {
+      0% {
+        left: 30%;
+      }
+  
+      40% {
+        left: 30%;
+  
+      }
+  
+      100% {
+        left: 0vw;
+      }
+    }
 

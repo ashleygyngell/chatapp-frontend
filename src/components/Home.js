@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getLoggedInUserToken } from '../lib/auth.js';
-import image1 from '../assets/images/logo-part-1.png';
-import image2 from '../assets/images/logo-part-2.png';
+
+import image2 from '../assets/images/C5.png';
+import image3 from '../assets/images/C2.png';
+import image4 from '../assets/images/C3.png';
+import image5 from '../assets/images/C4.png';
 
 const Home = () => {
   return (
@@ -12,21 +15,27 @@ const Home = () => {
           <>
             <div className="logo-container">
               <div className="parent">
-                <img id="image2" className="image2" src={image2} />
-                <img id="image1" className="image1" src={image1} />
+                <img id="logo-text" className="image2" src={image2} />
+                <img id="dot-1" className="image1" src={image3} />
+                <img id="dot-2" className="image1" src={image4} />
+                <img id="dot-3" className="image1" src={image5} />
               </div>
-              <span className="logo-text">Chat</span>
             </div>
             <div className=" has-text-centered ">
               <div className="column ">
                 <Link to="/register">
-                  <button className=" button ">Register</button>
+                  <button id="homepage-button" className=" button ">
+                    Register
+                  </button>
                 </Link>
               </div>
 
               <div className="column ">
                 <Link to="/login">
-                  <button className=" button is-success has-text-white">
+                  <button
+                    id="homepage-button"
+                    className=" button is-success has-text-white"
+                  >
                     Login
                   </button>
                 </Link>
@@ -38,10 +47,11 @@ const Home = () => {
           <>
             <div className="logo-container">
               <div className="parent">
-                <img className="image1" src={image1} />
-                <img id="image2" className="image2" src={image2} />
+                <img id="logo-text" className="image2" src={image2} />
+                <img id="dot-1" className="image1" src={image3} />
+                <img id="dot-2" className="image1" src={image4} />
+                <img id="dot-3" className="image1" src={image5} />
               </div>
-              <span className="logo-text">hat</span>
             </div>
 
             <div className=" has-text-centered">
