@@ -57,9 +57,9 @@ hr {
 
 .logo-container {
   display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo {
@@ -73,10 +73,10 @@ hr {
   font-weight: bolder
 }
 
-parent-not-homepage{
+parent-not-homepage {
   position: relative;
-    top: 0;
-    left: 0;
+  top: 0;
+  left: 0;
 }
 
 .parent {
@@ -143,7 +143,7 @@ parent-not-homepage{
   height: 3rem;
   width: auto;
   animation: fadeIn 1.5s ease backwards;
-    animation-delay: 2s;
+  animation-delay: 2s;
 }
 
 
@@ -155,27 +155,27 @@ parent-not-homepage{
   top: 2px;
   left: 8px;
   margin-bottom: -5px
-} 
+}
 
 
-.navbar-logo-parent:hover{
-  #dot1{
-      animation: fadeInLeft .9s ease backwards;
-      animation-delay: 0s;
-      animation-iteration-count: infinite;
-    }
-  
-    #dot2{
-      animation: fadeInLeft .9s ease backwards;
-      animation-delay: .2s;
-      animation-iteration-count: infinite;
-    }
-  
-    #dot3{
-      animation: fadeInLeft .9s ease backwards;
-      animation-delay: .4s;
-      animation-iteration-count: infinite;
-    }
+.navbar-logo-parent:hover {
+  #dot1 {
+    animation: fadeInLeft .9s ease backwards;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+  }
+
+  #dot2 {
+    animation: fadeInLeft .9s ease backwards;
+    animation-delay: .2s;
+    animation-iteration-count: infinite;
+  }
+
+  #dot3 {
+    animation: fadeInLeft .9s ease backwards;
+    animation-delay: .4s;
+    animation-iteration-count: infinite;
+  }
 }
 
 
@@ -217,29 +217,29 @@ parent-not-homepage{
 
 // ----------- Chatrooms ---------------
 
-.credentials-container{
+.credentials-container {
   display: flex;
   justify-content: center;
-} 
-
-.credentials-image { 
-    height: 14rem;
-      width: auto;
-      border-radius: 50%;
-      border: #035BFA 3px solid;
 }
 
-.chatrooms-container{
+.credentials-image {
+  height: 14rem;
+  width: auto;
+  border-radius: 50%;
+  border: #035BFA 3px solid;
+}
+
+.chatrooms-container {
   display: flex;
-    flex-direction: column;
-    justify-content: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .chatrooms-members {
   display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
+  flex-direction: row;
+  justify-content: center;
+}
 
 .chat-rooms {
   margin: -20px
@@ -274,12 +274,12 @@ parent-not-homepage{
   margin-top: 12px;
   background: white;
 }
-  
-  #compose-message-box {
+
+#compose-message-box {
   margin-top: 12px;
 }
 
-.message-data{
+.message-data {
   margin-top: auto;
   font-size: xx-small;
   color: white;
@@ -288,9 +288,9 @@ parent-not-homepage{
 
 .message-data-username {
   margin-top: 0;
-    font-size: small;
-    color: black;
-    padding-right: 5px;
+  font-size: small;
+  color: black;
+  padding-right: 5px;
 }
 
 // ----------- Messages ---------------
@@ -303,7 +303,7 @@ parent-not-homepage{
   display: flex;
   margin-right: 0;
   margin-left: auto;
-}  
+}
 
 .sent-message {
   display: flex;
@@ -317,7 +317,9 @@ parent-not-homepage{
   border-radius: 15px 15px;
   background-color: #035BFA;
   color: white;
-} p {
+}
+
+p {
   margin-bottom: 3px;
 }
 
@@ -333,14 +335,16 @@ parent-not-homepage{
   border-radius: 15px 15px;
   background-color: mediumseagreen;
   color: white;
-  } p {
+}
+
+p {
   margin-bottom: 3px;
   word-break: break-word;
-  }
+}
 
-  .label {
+.label {
   margin-bottom: 3px;
-  }
+}
 
 // ----------- Animations ---------------
 
@@ -358,26 +362,27 @@ parent-not-homepage{
   0% {
     opacity: 1;
   }
-    50% {
-      opacity: .2;
-    }
+
+  50% {
+    opacity: .2;
+  }
+
   100% {
     opacity: 1;
   }
 }
 
-    @keyframes fadeInMove {
-      0% {
-        left: 30%;
-      }
-  
-      40% {
-        left: 30%;
-  
-      }
-  
-      100% {
-        left: 0vw;
-      }
-    }
+@keyframes fadeInMove {
+  0% {
+    left: 30%;
+  }
 
+  40% {
+    left: 30%;
+
+  }
+
+  100% {
+    left: 0vw;
+  }
+}

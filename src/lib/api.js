@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { baseUrl } from '../config.js';
+// import { baseUrl } from '../config.js';
 
-// const baseUrl = 'http://127.0.0.1:8000';
+const baseUrl = 'http://127.0.0.1:8000';
 
 // ----------- User API Calls ---------------
 

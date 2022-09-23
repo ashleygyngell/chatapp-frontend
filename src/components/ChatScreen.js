@@ -8,8 +8,6 @@ import { sendMessage } from '../lib/api';
 
 import { getLoggedInUserToken } from '../lib/auth.js';
 
-const messageField = document.getElementById('message');
-
 document.addEventListener('keyup', function (event) {
   if (event.code === 'Enter') {
     console.log('Message Sent with Enter');
@@ -29,6 +27,8 @@ const ChatScreen = () => {
     sender_id: `${userId}`
   });
 
+  const messageField = document.getElementById('message-box');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     sendMessage(chatId, message);
@@ -38,18 +38,21 @@ const ChatScreen = () => {
       const finalResult = [await someResult, await anotherResult];
       setChat(finalResult[0].data);
       setChatData(finalResult[1].data);
+      messageField.value = '';
     } catch (err) {
       console.error(err);
     }
-    messageField.value = '';
+    messageField.firstChild.value = '';
   };
 
   function handleChange(event) {
     setMessage({ ...message, [event.target.name]: event.target.value });
   }
 
-  function handleClear() {
-    messageField.value = '';
+  function handleClear(e) {
+    e.preventDefault();
+    console.log(e, messageField.firstChild);
+    messageField.firstChild.value = '';
   }
 
   React.useEffect(() => {
@@ -169,7 +172,7 @@ const ChatScreen = () => {
             <label className="label">Compose Message:</label>
             <div id="message-box" className="control">
               <input
-                id="message"
+                id="message-box"
                 className="input is-success"
                 name="message"
                 onChange={handleChange}

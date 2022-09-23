@@ -28,20 +28,25 @@ const ChatRooms = () => {
   }, [chatId]);
 
   return (
-    <section className="section pt-1">
-      <div className="container has-text-centered">
-        <span className="not-homepage-text">My Chats</span>
-
+    <section className="section">
+      <div className="container">
+        <p className="title has-text-centered">My Chats</p>{' '}
         {!chatData ? (
-          <p>Loading chats...</p>
+          <p>Loading chat...</p>
         ) : (
           <>
             {chatData.data == 0 ? (
               <>
-                <p className="title is-3 pt-5">No chats ... Start a new chat</p>
-                <Link to="/newchat">
-                  <button className=" button has-text-success">New Chat</button>
-                </Link>
+                <div className="has-text-centered">
+                  <p className="title is-3 pt-5">
+                    No chats ... Start a new chat
+                  </p>
+                  <Link to="/newchat">
+                    <button className=" button has-text-success">
+                      New Chat
+                    </button>
+                  </Link>
+                </div>
               </>
             ) : (
               <div className="chatrooms-container">
