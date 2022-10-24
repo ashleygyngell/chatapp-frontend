@@ -1,15 +1,9 @@
-<!-- CHECK -->
+## Deployment 
 
-## Using NPM
+This app has been deployed via Heroku and Netlify and is available [here](https://chatwithchatapp.netlify.app/).
 
-`npm run start` or `npm run dev` to run the development server
+The free servers on Heroku sleep when they are not in use, so please allow a few seconds for them to wake up!
 
-`npm run build` to create a build directory
+Feel free to register as a user or use: **email:** `demo@demo.com` & **password:** `Demo123!`
 
-## Using Yarn
-
-`yarn start` or `yarn dev` to run the development server
-
-`yarn build` to create a build directory
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This Repo is for the frontend only. The code for the backend is available [here](https://github.com/ashleygyngell/chatbot-backend).
